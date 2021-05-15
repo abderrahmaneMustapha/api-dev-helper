@@ -33,7 +33,7 @@ const prev = () => {
 };
 
 return (
-  <>
+  <div  style={{margin:"2em"}}>
     <AntSteps current={current}>
       {steps.map(item => (
         <AntSteps.Step key={item.title} title={item.title} />
@@ -57,7 +57,7 @@ return (
         </Button>
       )}
     </div>
-  </>
+  </div>
 
 )
 }
