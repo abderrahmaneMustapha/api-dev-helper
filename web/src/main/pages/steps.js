@@ -1,5 +1,5 @@
 import React from "react"
-import { Steps as AntSteps,   Button,message} from "antd"
+import { Steps as AntSteps,   Button} from "antd"
 import Planing from "./steps/planing"
 import Design from "./steps/design"
 import Checks from "./steps/checks"
@@ -13,7 +13,7 @@ const steps = [
       content: <Design />,
     },
     {
-      title: 'Checks',
+      title: 'Dashboard',
       content: <Checks />,
     },
   ];
@@ -46,11 +46,7 @@ return (
           Next
         </Button>
       )}
-      {current === steps.length - 1 && (
-        <Button type="primary" onClick={() => message.success('Processing complete!')}>
-          Done
-        </Button>
-      )}
+    
       {current > 0 && (
         <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
           Previous

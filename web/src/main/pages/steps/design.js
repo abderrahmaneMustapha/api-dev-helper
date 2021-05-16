@@ -471,6 +471,22 @@ const Design = () => {
                     </Radio.Group>
                 </Form.Item>
 
+                <Form.Item
+                    name="open-closed"
+                    label="Is this api a closed source or open source"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please pick an item!",
+                        },
+                    ]}
+                >
+                    <Radio.Group>
+                        <Radio.Button value="yes">Open source</Radio.Button>
+                        <Radio.Button value="not-sure">Closed source</Radio.Button>
+                    </Radio.Group>
+                </Form.Item>
+
                 <Form.Item>
                     <Button type="primary" htmlType="submit">
                         Done
