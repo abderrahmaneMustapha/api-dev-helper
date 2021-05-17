@@ -19,17 +19,18 @@ func ValidatePlaning(w http.ResponseWriter, r *http.Request){
         return
     }
 
-  
-
-   
 	planingValidationError := validator_.Struct(p)
 	
 	if (planingValidationError !=nil){
-		for _, e := range planingValidationError.(validator.ValidationErrors) {
-			fmt.Println(e)
+		for _, e:= range planingValidationError.(validator.ValidationErrors) {			
+			fmt.Println(w, e)
+			http.Error(w, planingValidationError.Error(), http.StatusBadRequest)
+			return
 		}
 	}
+
+	p_marshaled, _ := json.Marshal(p)
     
 	 // Do something with the Person struct...
-	 fmt.Fprintf(w, "Person: %+v", p)
+	 fmt.Fprintf(w, "%+v", string(p_marshaled))
 }
