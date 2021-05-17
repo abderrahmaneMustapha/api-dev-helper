@@ -1,0 +1,85 @@
+{
+    "data": [{
+            "key": "api-available-for",
+            "question": "You want your api to be available for",
+            "choices": [{
+                "choice": "Internal use",
+                "score": -1
+            }, {
+                "choice": "Partners",
+                "score": 1
+            }, {
+                "choice": "Public",
+                "score": 2
+            }]
+
+        },
+        {
+            "key": "api-main-product",
+            "question": "This api is the main product of your buisiness",
+            "choices": [{
+                "choice": "Yes",
+                "score": 2
+            }, {
+                "choice": "Not Sure",
+                "score": 0
+            }, {
+                "choice": "No",
+                "score": -1
+            }]
+        },
+        {
+            "key": "api-dx",
+            "question": "Does developer experience matter for you",
+            "choices": [{
+                "choice": "Yes",
+                "score": 2
+            }, {
+                "choice": "Not Sure",
+                "score": 0
+            }, {
+                "choice": "No",
+                "score": -1
+            }]
+        },
+        {
+            "key": "communication",
+            "question": "You want to ensure a good communication between your team members",
+            "choices": [{
+                "choice": "Yes",
+                "score": 1
+            }, {
+                "choice": "Not Sure",
+                "score": 0
+            }, {
+                "choice": "No",
+                "score": -1
+            }]
+        },
+        {
+            "key": "technology",
+            "question": "The technology used to create the api",
+            "choices": [{
+                "choice": "Graphql",
+                "score": -1
+            }, {
+                "choice": "RestfulApi",
+                "score": 1
+            }]
+
+        },
+
+        {
+            "key": "open-closed",
+            "question": "Is this api a closed source or open source",
+            "choices": [{
+                "choice": "Open source",
+                "score": 0
+            }, {
+                "choice": "Closed source",
+                "score": 0
+            }]
+
+        }
+    ]
+}
