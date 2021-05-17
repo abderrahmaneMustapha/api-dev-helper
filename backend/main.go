@@ -7,6 +7,7 @@ import (
 	"github.com/gorilla/mux"
     "apiDevHelper/github"
     "apiDevHelper/planing"
+    "apiDevHelper/design"
 )
 
 
@@ -34,6 +35,8 @@ func handleRequests() {
     //myRouter.HandleFunc("/articles", returnAllArticles)
 	myRouter.HandleFunc("/repos/{owner}/{repo}", github.ReturnRepo)
     myRouter.HandleFunc("/steps/planing/validation", planing.ValidatePlaning)
+    myRouter.HandleFunc("/steps/design/validation", design.ValidateDesign)
+   
     log.Fatal(http.ListenAndServe(":10000", myRouter))
 }
 
