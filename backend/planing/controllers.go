@@ -4,11 +4,12 @@ import (
     "net/http"
 	"github.com/go-playground/validator"
 	"encoding/json"
-	
+	"apiDevHelper/common"	
 )
 
 
 func ValidatePlaning(w http.ResponseWriter, r *http.Request){
+	common.EnableCors(&w)
 	r.ParseForm() 
 	validator_ := validator.New()
 
