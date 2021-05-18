@@ -90,7 +90,7 @@ func ValidateDesign(w http.ResponseWriter, r *http.Request){
 		approach  = "Design First"
 	}
 	
-	fmt.Fprintf(w, `{"Approach"  : "`+approach+`"}`)
+	fmt.Fprintf(w, `{"approach"  : "`+approach+`"}`)
 }
 
 
