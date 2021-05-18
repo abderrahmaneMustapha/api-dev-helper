@@ -1,22 +1,19 @@
 import React, { useState } from "react";
-import { Form, Button, Radio, Modal, Input, Checkbox, Divider } from "antd";
+import {
+    Form,
+    Button,
+    Radio,
+    Modal,
+    Input,
+    Checkbox,
+    Divider,
+    message,
+} from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
-const ModalContent = (props) => {
-    const [form] = Form.useForm();
-
-    const onFinish = (values) => {
-        console.log("Received values of form: ", values);
-        //props.close();
-    };
-
+const RestfulDesignFormContent = () => {
     return (
-        <Form
-            name="api-design-phase"
-            form={form}
-            onFinish={onFinish}
-            layout="vertical"
-        >
+        <>
             <Form.Item
                 name="url-design-approach"
                 label="Pick the approach you want to use to design the url"
@@ -70,8 +67,86 @@ const ModalContent = (props) => {
                 </Radio.Group>
             </Form.Item>
 
+        </>
+    );
+};
+
+const GraphqlDesignFormContent = () => {
+    return (
+        <>
+            <Form.Item
+                name="res-req-data"
+                label="You indetified  the request and response data "
+                rules={[
+                    {
+                        required: true,
+                        message: "Please pick an item!",
+                    },
+                ]}
+            >
+                <Radio.Group>
+                    <Radio.Button value="yes">Yes</Radio.Button>
+                    <Radio.Button value="not-yet">Not yet</Radio.Button>
+                </Radio.Group>
+            </Form.Item>
+
+            <Form.Item
+                name="graphql-types"
+                label="You Designed the graphql types"
+                rules={[
+                    {
+                        required: true,
+                        message: "Please pick an item!",
+                    },
+                ]}
+            >
+                <Radio.Group>
+                    <Radio.Button value="yes">Yes</Radio.Button>
+                    <Radio.Button value="not-yet">Not yet</Radio.Button>
+                </Radio.Group>
+            </Form.Item>
+
             <Form.Item
                 name="define-fields-param"
+                label="You design  mutations and querys based on http verbs"
+                rules={[
+                    {
+                        required: true,
+                        message: "Please pick an item!",
+                    },
+                ]}
+            >
+                <Radio.Group>
+                    <Radio.Button value="yes">Yes</Radio.Button>
+                    <Radio.Button value="not-yet">Not yet</Radio.Button>
+                </Radio.Group>
+            </Form.Item>
+        </>
+    );
+};
+
+const DesignFirstModalContent = (props) => {
+    const [form] = Form.useForm();
+
+    const onFinish = (values) => {
+        console.log("Received values of form: ", values);
+        //props.close();
+    };
+
+    return (
+        <Form
+            name="api-design-phase"
+            form={form}
+            onFinish={onFinish}
+            layout="vertical"
+        >
+            {props.technology === "graphql" ? (
+                <GraphqlDesignFormContent />
+            ) : (
+                <RestfulDesignFormContent />
+            )}
+            <Form.Item
+                name="default-http-header-enough"
                 label="Was the standard http headers enough for you "
                 rules={[
                     {
@@ -87,13 +162,16 @@ const ModalContent = (props) => {
                 </Radio.Group>
             </Form.Item>
 
-
-            <Form.List  initialValue={[""]}  name="custome-http-headers">
+            <Form.List initialValue={[""]} name="custome-http-headers">
                 {(fields, { add, remove }, { errors }) => (
                     <>
                         {fields.map((field, index) => (
                             <Form.Item
-                                label= {index === 0 ? "If not specify some Custome http headers you used with a description" :  ""}
+                                label={
+                                    index === 0
+                                        ? "If not specify some Custome http headers you used with a description"
+                                        : ""
+                                }
                                 required={false}
                                 key={field.key}
                             >
@@ -136,7 +214,7 @@ const ModalContent = (props) => {
                                 </Form.Item>
 
                                 <Form.Item
-                                    style={{marginRight:"1em"}}
+                                    style={{ marginRight: "1em" }}
                                     {...field}
                                     validateTrigger={["onChange", "onBlur"]}
                                     rules={[
@@ -176,7 +254,7 @@ const ModalContent = (props) => {
                     </>
                 )}
             </Form.List>
-            
+
             <Form.Item
                 name="handle-errors"
                 label="Handling errors messages done"
@@ -225,7 +303,9 @@ const ModalContent = (props) => {
                 <Radio.Group>
                     <Radio.Button value="swagger">Swagger</Radio.Button>
                     <Radio.Button value="raml">Raml</Radio.Button>
-                    <Radio.Button value="apiblueprint">ApiBlueprint</Radio.Button>                   
+                    <Radio.Button value="apiblueprint">
+                        ApiBlueprint
+                    </Radio.Button>
                 </Radio.Group>
             </Form.Item>
 
@@ -241,7 +321,7 @@ const ModalContent = (props) => {
             >
                 <Radio.Group>
                     <Radio.Button value="done">Done</Radio.Button>
-                    <Radio.Button value="not-yet">Not yet</Radio.Button>                  
+                    <Radio.Button value="not-yet">Not yet</Radio.Button>
                 </Radio.Group>
             </Form.Item>
 
@@ -257,7 +337,7 @@ const ModalContent = (props) => {
             >
                 <Radio.Group>
                     <Radio.Button value="done">Done</Radio.Button>
-                    <Radio.Button value="not-yet">Not yet</Radio.Button>                  
+                    <Radio.Button value="not-yet">Not yet</Radio.Button>
                 </Radio.Group>
             </Form.Item>
 
@@ -273,7 +353,7 @@ const ModalContent = (props) => {
             >
                 <Radio.Group>
                     <Radio.Button value="done">Done</Radio.Button>
-                    <Radio.Button value="not-yet">Not yet</Radio.Button>                  
+                    <Radio.Button value="not-yet">Not yet</Radio.Button>
                 </Radio.Group>
             </Form.Item>
 
@@ -291,7 +371,7 @@ const ModalContent = (props) => {
             >
                 <Radio.Group>
                     <Radio.Button value="done">Done</Radio.Button>
-                    <Radio.Button value="not-yet">Not yet</Radio.Button>                  
+                    <Radio.Button value="not-yet">Not yet</Radio.Button>
                 </Radio.Group>
             </Form.Item>
 
@@ -307,14 +387,14 @@ const ModalContent = (props) => {
             >
                 <Radio.Group>
                     <Radio.Button value="done">Git</Radio.Button>
-                    <Radio.Button value="cvs">Cvs</Radio.Button>  
-                    <Radio.Button value="svn">Svn</Radio.Button> 
-                    <Radio.Button value="mercurial">Mercurial</Radio.Button> 
-                    <Radio.Button value="bazaar">Bazaar</Radio.Button>    
+                    <Radio.Button value="cvs">Cvs</Radio.Button>
+                    <Radio.Button value="svn">Svn</Radio.Button>
+                    <Radio.Button value="mercurial">Mercurial</Radio.Button>
+                    <Radio.Button value="bazaar">Bazaar</Radio.Button>
                     <Radio.Button value="tfs">Tfs</Radio.Button>
-                    <Radio.Button value="vsts">Vsts</Radio.Button>  
-                    <Radio.Button value="rcs">Rcs</Radio.Button>    
-                    <Radio.Button value="vss">Vss</Radio.Button>         
+                    <Radio.Button value="vsts">Vsts</Radio.Button>
+                    <Radio.Button value="rcs">Rcs</Radio.Button>
+                    <Radio.Button value="vss">Vss</Radio.Button>
                 </Radio.Group>
             </Form.Item>
 
@@ -324,9 +404,11 @@ const ModalContent = (props) => {
             >
                 <Radio.Group>
                     <Radio.Button value="github">Github</Radio.Button>
-                    <Radio.Button value="gitlab">Gitlab</Radio.Button>  
-                    <Radio.Button value="bitbucket">Bitbucket/ jira / atlassian</Radio.Button> 
-                    <Radio.Button value="azure">Azure devops</Radio.Button>                     
+                    <Radio.Button value="gitlab">Gitlab</Radio.Button>
+                    <Radio.Button value="bitbucket">
+                        Bitbucket/ jira / atlassian
+                    </Radio.Button>
+                    <Radio.Button value="azure">Azure devops</Radio.Button>
                 </Radio.Group>
             </Form.Item>
 
@@ -342,7 +424,7 @@ const ModalContent = (props) => {
             >
                 <Radio.Group>
                     <Radio.Button value="done">Done</Radio.Button>
-                    <Radio.Button value="not-yet">Not yet</Radio.Button>                       
+                    <Radio.Button value="not-yet">Not yet</Radio.Button>
                 </Radio.Group>
             </Form.Item>
 
@@ -355,16 +437,35 @@ const ModalContent = (props) => {
                     Done
                 </Button>
             </Form.Item>
+        
         </Form>
     );
 };
+
 const Design = () => {
     const [form] = Form.useForm();
+    const [technology, setTechnology] = useState("");
 
     const onFinish = (values) => {
-        console.log("Received values of form: ", values);
+        fetch("http://localhost:10000/steps/design/validation", {
+            method: "POST",
+            body: JSON.stringify(values),
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                message.success("Data has validated successfully");
 
-        showModal();
+                if (result.approach === "Design First") {
+                    setTechnology(values.technology);
+                    showModal();
+                } else if (result.approach === "Code First") {
+                    codeFirstInfo();
+                }
+            })
+            .catch((error) => {
+                message.error("An error has aquired while validating the data");
+                console.error("Error:", error);
+            });
     };
 
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -375,6 +476,19 @@ const Design = () => {
 
     const handleClose = () => {
         setIsModalVisible(false);
+    };
+
+    const codeFirstInfo = () => {
+        Modal.info({
+            title: "Code first",
+            content: (
+                <div>
+                    <p>depeding on your answers ,</p>
+                    <p>you should jump directly to developement phase</p>
+                </div>
+            ),
+            onOk() {},
+        });
     };
 
     return (
@@ -466,8 +580,10 @@ const Design = () => {
                     ]}
                 >
                     <Radio.Group>
-                        <Radio.Button value="yes">Graphql</Radio.Button>
-                        <Radio.Button value="not-sure">RestfulApi</Radio.Button>
+                        <Radio.Button value="graphql">Graphql</Radio.Button>
+                        <Radio.Button value="restfulApi">
+                            RestfulApi
+                        </Radio.Button>
                     </Radio.Group>
                 </Form.Item>
 
@@ -482,8 +598,12 @@ const Design = () => {
                     ]}
                 >
                     <Radio.Group>
-                        <Radio.Button value="yes">Open source</Radio.Button>
-                        <Radio.Button value="not-sure">Closed source</Radio.Button>
+                        <Radio.Button value="opensource">
+                            Open source
+                        </Radio.Button>
+                        <Radio.Button value="closedsource">
+                            Closed source
+                        </Radio.Button>
                     </Radio.Group>
                 </Form.Item>
 
@@ -499,7 +619,10 @@ const Design = () => {
                     onCancel={handleClose}
                     visible={isModalVisible}
                 >
-                    <ModalContent close={handleClose} />
+                    <DesignFirstModalContent
+                        technology={technology}
+                        close={handleClose}
+                    />
                 </Modal>
             </>
         </>
