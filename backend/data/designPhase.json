@@ -3,13 +3,13 @@
             "key": "api-available-for",
             "question": "You want your api to be available for",
             "choices": [{
-                "choice": "Internal use",
+                "choice": "private",
                 "score": -1
             }, {
-                "choice": "Partners",
+                "choice": "partners",
                 "score": 1
             }, {
-                "choice": "Public",
+                "choice": "public",
                 "score": 2
             }]
 
@@ -18,13 +18,13 @@
             "key": "api-main-product",
             "question": "This api is the main product of your buisiness",
             "choices": [{
-                "choice": "Yes",
+                "choice": "yes",
                 "score": 2
             }, {
-                "choice": "Not Sure",
+                "choice": "not-sure",
                 "score": 0
             }, {
-                "choice": "No",
+                "choice": "no",
                 "score": -1
             }]
         },
@@ -32,13 +32,13 @@
             "key": "api-dx",
             "question": "Does developer experience matter for you",
             "choices": [{
-                "choice": "Yes",
+                "choice": "yes",
                 "score": 2
             }, {
-                "choice": "Not Sure",
+                "choice": "not-sure",
                 "score": 0
             }, {
-                "choice": "No",
+                "choice": "no",
                 "score": -1
             }]
         },
@@ -46,13 +46,13 @@
             "key": "communication",
             "question": "You want to ensure a good communication between your team members",
             "choices": [{
-                "choice": "Yes",
-                "score": 1
+                "choice": "yes",
+                "score": 2
             }, {
-                "choice": "Not Sure",
+                "choice": "not-sure",
                 "score": 0
             }, {
-                "choice": "No",
+                "choice": "no",
                 "score": -1
             }]
         },
@@ -60,10 +60,10 @@
             "key": "technology",
             "question": "The technology used to create the api",
             "choices": [{
-                "choice": "Graphql",
+                "choice": "graphql",
                 "score": -1
             }, {
-                "choice": "RestfulApi",
+                "choice": "restfulApi",
                 "score": 1
             }]
 
@@ -73,10 +73,10 @@
             "key": "open-closed",
             "question": "Is this api a closed source or open source",
             "choices": [{
-                "choice": "Open source",
+                "choice": "opensource",
                 "score": 0
             }, {
-                "choice": "Closed source",
+                "choice": "closedsource",
                 "score": 0
             }]
 

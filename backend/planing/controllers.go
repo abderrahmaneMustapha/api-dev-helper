@@ -26,8 +26,9 @@ func ValidatePlaning(w http.ResponseWriter, r *http.Request){
 		for _, e:= range planingValidationError.(validator.ValidationErrors) {			
 			fmt.Println(w, e)
 			http.Error(w, planingValidationError.Error(), http.StatusBadRequest)
-			return
+			
 		}
+		return
 	}
 
 	p_marshaled, _ := json.Marshal(p)
