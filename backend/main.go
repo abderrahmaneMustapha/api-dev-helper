@@ -34,9 +34,14 @@ func handleRequests() {
     myRouter.HandleFunc("/", homePage)
     //myRouter.HandleFunc("/articles", returnAllArticles)
 	myRouter.HandleFunc("/repos/{owner}/{repo}", github.ReturnRepo)
+    myRouter.HandleFunc("/repos/{owner}/{repo}/branches", github.ReturnBraches)
+    myRouter.HandleFunc("/repos/{owner}/{repo}/branches/{branch}/protection", github.ReturnBrancheProtection)
+    myRouter.HandleFunc("/repos/{owner}/{repo}/issues", github.ReturnRepoIssues)
+    myRouter.HandleFunc("/repos/{owner}/{repo}/pulls", github.ReturnPullRequests)    
+   
     myRouter.HandleFunc("/steps/planing/validation", planing.ValidatePlaning)
     myRouter.HandleFunc("/steps/design/validation", design.ValidateDesign)
-   
+    
     log.Fatal(http.ListenAndServe(":10000", myRouter))
 }
 

@@ -12,224 +12,12 @@ import {
     List,
 } from "antd";
 import { Bar, Pie } from "@ant-design/charts";
-import { SearchOutlined, CloseCircleOutlined, CheckCircleOutlined } from "@ant-design/icons";
+import {
+    SearchOutlined,
+    CloseCircleOutlined,
+    CheckCircleOutlined,
+} from "@ant-design/icons";
 import InfiniteScroll from "react-infinite-scroller";
-
-var data = [
-    {
-        state: "Open",
-        year: "12-12-2020",
-        value: 502,
-    },
-    {
-        state: "Open",
-        year: "12-10-2020",
-        value: 635,
-    },
-    {
-        state: "Open",
-        year: "12-15-2020",
-        value: 809,
-    },
-    {
-        state: "Open",
-        year: "12-10-2020",
-        value: 947,
-    },
-    {
-        state: "Open",
-        year: "12-12-2020",
-        value: 1402,
-    },
-    {
-        state: "Open",
-        year: "12-10-2020",
-        value: 3634,
-    },
-    {
-        state: "Open",
-        year: "12-12-2020",
-        value: 5268,
-    },
-    {
-        state: "Solved",
-        year: "12-13-2020",
-        value: 106,
-    },
-    {
-        state: "Solved",
-        year: "12-13-2020",
-        value: 107,
-    },
-    {
-        state: "Solved",
-        year: "12-12-2020",
-        value: 111,
-    },
-    {
-        state: "Solved",
-        year: "12-11-2020",
-        value: 133,
-    },
-    {
-        state: "Solved",
-        year: "12-11-2020",
-        value: 221,
-    },
-    {
-        state: "Solved",
-        year: "12-12-2020",
-        value: 767,
-    },
-    {
-        state: "Solved",
-        year: "12-12-2020",
-        value: 1766,
-    },
-    {
-        state: "Closed",
-        year: "12-12-2020",
-        value: 163,
-    },
-    {
-        state: "Closed",
-        year: "12-12-2020",
-        value: 203,
-    },
-    {
-        state: "Closed",
-        year: "12-15-2020",
-        value: 276,
-    },
-    {
-        state: "Closed",
-        year: "12-15-2020",
-        value: 408,
-    },
-    {
-        state: "Closed",
-        year: "12-15-2020",
-        value: 547,
-    },
-    {
-        state: "Closed",
-        year: "12-15-2020",
-        value: 729,
-    },
-    {
-        state: "Closed",
-        year: "12-15-2020",
-        value: 628,
-    },
-];
-
-var prdata = [
-    {
-        state: "Merged",
-        year: "12-12-2020",
-        value: 502,
-    },
-    {
-        state: "Merged",
-        year: "12-10-2020",
-        value: 635,
-    },
-    {
-        state: "Merged",
-        year: "12-15-2020",
-        value: 809,
-    },
-    {
-        state: "Merged",
-        year: "12-10-2020",
-        value: 947,
-    },
-    {
-        state: "Merged",
-        year: "12-12-2020",
-        value: 1402,
-    },
-    {
-        state: "Merged",
-        year: "12-10-2020",
-        value: 3634,
-    },
-    {
-        state: "Merged",
-        year: "12-12-2020",
-        value: 5268,
-    },
-    {
-        state: "Not yet",
-        year: "12-13-2020",
-        value: 106,
-    },
-    {
-        state: "Not yet",
-        year: "12-13-2020",
-        value: 107,
-    },
-    {
-        state: "Not yet",
-        year: "12-12-2020",
-        value: 111,
-    },
-    {
-        state: "Not yet",
-        year: "12-11-2020",
-        value: 133,
-    },
-    {
-        state: "Not yet",
-        year: "12-11-2020",
-        value: 221,
-    },
-    {
-        state: "Not yet",
-        year: "12-12-2020",
-        value: 767,
-    },
-    {
-        state: "Not yet",
-        year: "12-12-2020",
-        value: 1766,
-    },
-    {
-        state: "Closed",
-        year: "12-12-2020",
-        value: 163,
-    },
-    {
-        state: "Closed",
-        year: "12-12-2020",
-        value: 203,
-    },
-    {
-        state: "Closed",
-        year: "12-15-2020",
-        value: 276,
-    },
-    {
-        state: "Closed",
-        year: "12-15-2020",
-        value: 408,
-    },
-    {
-        state: "Closed",
-        year: "12-15-2020",
-        value: 547,
-    },
-    {
-        state: "Closed",
-        year: "12-15-2020",
-        value: 729,
-    },
-    {
-        state: "Closed",
-        year: "12-15-2020",
-        value: 628,
-    },
-];
 
 var piedata = [
     {
@@ -244,6 +32,7 @@ var piedata = [
 
 const fakeDataUrl =
     "https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo";
+
 const faketagsData = [
     {
         id: 3,
@@ -285,19 +74,179 @@ const Checks = () => {
         message.success("Can not connecte to repo ")
     }*/
 
+    const getRepoBranches = (owner, repository) => {
+        fetch(`http://localhost:10000/repos/${owner}/${repository}/branches`)
+            .then((response) => response.json())
+            .then((result) => {
+                setBranches(result);
+            })
+            .catch((error) => {
+                message.error("An error has aquired while fetching branches");
+            });
+    };
+
+    const getRepoBranchDataProtection = (owner, repository, default_branch) => {
+        fetch(
+            `http://localhost:10000/repos/${owner}/${repository}/branches/${default_branch}/protection`
+        )
+            .then((response) => response.json())
+            .then((result) => {
+                setDefaultBranchProtection(result);
+                console.log(
+                    " branch protection : " +
+                        result.required_pull_request_reviews
+                            .require_code_owner_reviews
+                );
+            })
+            .catch((error) => {
+                message.error("An error has aquired while fetching branches");
+            });
+    };
+
+    const countIssues = (result) => {
+        
+        var states =  result.map((value)=>{
+            return value.state
+        })
+
+        var unique_states = [...new Set(states)]
+        
+        var issues = []       
+      
+        Array.prototype.forEach.call(result, (element)=>{
+            Array.prototype.forEach.call(unique_states, (unique_states_element)=>{
+                    if (unique_states_element === element.state){
+                        if( issues.length > 0){
+                           var index =  Array.prototype.findIndex.call(issues, (issues_element)=>{
+                                return unique_states_element === issues_element.state
+                            })
+
+                            issues[index].count +=1
+                        }
+                        else {
+                            issues.push({
+                                state : element.state,
+                                count : 1
+                            })  
+                        }
+                                             
+                    }
+            })           
+        })
+        
+        return issues
+    };
+
+    const getRepoBranchIssues = (owner, repository) => {
+        fetch(`http://localhost:10000/repos/${owner}/${repository}/issues`)
+            .then((response) => response.json())
+            .then( async (result) => {
+
+                var issues = await countIssues(result);
+                console.log("Issues " + issues);
+                setIssuesData(issues);
+            })
+            .catch((error) => {
+                console.log(error)
+                message.error("An error has aquired while getting  issues")
+            });
+    };
+
+    const countPullRequest = (result) => {
+        
+        var pullRequests =  result.map((value)=>{
+            return value.state
+        })
+
+        var unique_prs = [...new Set(pullRequests )]
+        
+        var prs = []       
+      
+        Array.prototype.forEach.call(result, (element)=>{
+            Array.prototype.forEach.call(unique_prs, (unique_prs_element)=>{
+                
+                    if (unique_prs_element === element.state){
+                        if( prs.length > 0){
+                           var index =  Array.prototype.findIndex.call(prs, (prs_element)=>{
+                                return unique_prs_element === prs_element.state
+                            })
+                            console.log("index : " + index)
+                            prs[index].count +=1
+                        }
+                        else {
+                            prs.push({
+                                state : element.state,
+                                count : 1
+                            })  
+                        }
+                                             
+                    }
+
+            })           
+        })
+        
+        return prs
+    };
+
+    const getRepoBranchPrs = (owner, repository) => {
+        fetch(`http://localhost:10000/repos/${owner}/${repository}/pulls`)
+            .then((response) => response.json())
+            .then( async (result) => {
+
+                var prs = await countPullRequest(result);
+                console.log("Pulls " + prs);
+                setPrData(prs);
+            })
+            .catch((error) => {
+                console.log(error)
+                message.error("An error has aquired while fetching pr")
+            });
+    };
     const SearchForRepo = () => {
         let owner = document.getElementById("owner-name-input").value;
         let repository = document.getElementById("repo-name-input").value;
 
+        fetch(`http://localhost:10000/repos/${owner}/${repository}`)
+            .then((response) => response.json())
+            .then(async (result) => {
+                message.success("Data has validated successfully");
+                await setRepoData(result);
+                await getRepoBranches(owner, repository);
+                await setDefaultBranch(result.default_branch);
+                await getRepoBranchIssues(owner, repository);
+                await getRepoBranchPrs(owner, repository);
+                await getRepoBranchDataProtection(
+                    owner,
+                    repository,
+                    result.default_branch
+                );
+               
+                console.log(repoData);
+            })
+            .catch((error) => {
+                message.error("An error has aquired while validating the data");
+            });
+
         repoFoundMessage(repository, owner);
     };
 
+    const [tagsData, setTagsData] = React.useState([]);
+    const [loading, setLoading] = React.useState(false);
+    const [hasMore, setHasMore] = React.useState(false);
+    const [repoData, setRepoData] = React.useState([]);
+    const [branches, setBranches] = React.useState([]);
+    const [default_branch, setDefaultBranch] = React.useState("");
+    const [default_branch_protection, setDefaultBranchProtection] =
+        React.useState("");
+    const [prdata, setPrData] = React.useState([]);
+    const [issuesData, setIssuesData] = React.useState([]);
+
     var issuesConfig = {
-        data: data,
+        data: issuesData,
         autoFit: false,
         width: 350,
-        xField: "value",
-        yField: "year",
+        xField: "count",
+        yField: "count",
         seriesField: "state",
         isPercent: true,
         isStack: true,
@@ -305,7 +254,7 @@ const Checks = () => {
         label: {
             position: "middle",
             content: function content(item) {
-                return item.value.toFixed(2);
+                return item.value;
             },
             style: { fill: "#fff" },
         },
@@ -314,8 +263,8 @@ const Checks = () => {
         data: prdata,
         autoFit: false,
         width: 350,
-        xField: "value",
-        yField: "year",
+        xField: "count",
+        yField: "count",
         seriesField: "state",
         isPercent: true,
         isStack: true,
@@ -323,7 +272,7 @@ const Checks = () => {
         label: {
             position: "middle",
             content: function content(item) {
-                return item.value.toFixed(2);
+                return item.value;
             },
             style: { fill: "#fff" },
         },
@@ -420,10 +369,6 @@ const Checks = () => {
         },
     };
 
-    const [tagsData, setTagsData] = React.useState([]);
-    const [loading, setLoading] = React.useState(false);
-    const [hasMore, setHasMore] = React.useState(false);
-
     useEffect(() => {
         fetchData((res) => {
             setTagsData(res.results);
@@ -449,6 +394,10 @@ const Checks = () => {
             data = data.concat(res.results);
             setTagsData(data);
         });
+    };
+
+    const handleChange = (value) => {
+        console.log(`selected ${value}`);
     };
 
     return (
@@ -486,23 +435,55 @@ const Checks = () => {
                 <Tag>
                     <span className="span-tag-text">Merges: </span> 100
                 </Tag>
+
+                <Select
+                    defaultValue="branches"
+                    onChange={handleChange}
+                    style={{ width: "120%" }}
+                >
+                    {branches
+                        ? branches.map((value) => {
+                              return (
+                                  <Select.Option value={value.name}>
+                                      {value.name}
+                                  </Select.Option>
+                              );
+                          })
+                        : ""}
+                </Select>
             </Space>
 
             <Space style={{ width: "100%", marginBottom: "2em" }} size={15}>
                 <Card style={{ width: 240, height: "auto" }}>
-                    <Result
-                        status="success"
-                        subTitle="access to main branch is restricted"
-                        extra={[<Button key="buy">Check again</Button>]}
-                    />
+                    {default_branch_protection &&
+                    default_branch_protection.require_code_owner_reviews ===
+                        true ? (
+                        <Result
+                            status="success"
+                            subTitle="access to main branch is restricted"
+                            extra={[<Button key="check">Check again</Button>]}
+                        />
+                    ) : (
+                        <Result
+                            status="error"
+                            subTitle="access to main branch is not restricted"
+                            extra={[<Button key="check">Check again</Button>]}
+                        />
+                    )}
                     <Space direction="vertical" align="center">
                         <Tag>
-                            <span className="span-tag-text"> master </span> is
-                            the main branch name
+                            <span className="span-tag-text">
+                                {default_branch}
+                            </span>{" "}
+                            is the default branch name
                         </Tag>
                         <Tag>
-                            <span className="span-tag-text"> 2 </span> reviewers
-                            is required to merge
+                            <span className="span-tag-text">
+                                {
+                                    default_branch_protection.require_code_owner_reviews
+                                }
+                            </span>
+                            reviews is required to merge a pr
                         </Tag>
                     </Space>
                 </Card>
@@ -552,9 +533,13 @@ const Checks = () => {
                                     key={item.id}
                                     extra={
                                         item.respect === "no" ? (
-                                            <CloseCircleOutlined style= {{color: "#f55f5b"}} />
+                                            <CloseCircleOutlined
+                                                style={{ color: "#f55f5b" }}
+                                            />
                                         ) : (
-                                            <CheckCircleOutlined style= {{color:"#67f45d"}} />
+                                            <CheckCircleOutlined
+                                                style={{ color: "#67f45d" }}
+                                            />
                                         )
                                     }
                                 >
