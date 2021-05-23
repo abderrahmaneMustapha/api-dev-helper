@@ -23,3 +23,7 @@ code {
  font-weight: bolder;
 }
 
+#tags .ant-list-items{
+  overflow: auto;
+  max-height: 400px;
+}

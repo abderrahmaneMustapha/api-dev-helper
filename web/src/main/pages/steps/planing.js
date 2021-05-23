@@ -4,29 +4,32 @@ const Planing = () => {
     const [form] = Form.useForm();
 
     const onFinish = (values) => {
-      
-        
         fetch("http://localhost:10000/steps/planing/validation", {
             method: "POST",
-            body:  JSON.stringify(values),
+            body: JSON.stringify(values),
         })
             .then((response) => response.json())
             .then((result) => {
-                message.success("Data has validated successfully")
+                message.success("Data has validated successfully");
                 console.log("Success:", result);
             })
             .catch((error) => {
-                message.error("An error has aquired while validating the data")
+                message.error("An error has aquired while validating the data");
                 console.error("Error:", error);
             });
     };
 
     const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-      };
+        console.log("Failed:", errorInfo);
+    };
 
     return (
-        <Form name="planing-form" form={form}  onFinish={onFinish}  onFinishFailed={onFinishFailed}>
+        <Form
+            name="planing-form"
+            form={form}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+        >
             <Form.Item
                 name="needs"
                 valuePropName="checked"
@@ -86,7 +89,6 @@ const Planing = () => {
             <Form.Item
                 name="time"
                 valuePropName="checked"
-                
                 rules={[
                     {
                         validator: (_, value) => {
@@ -120,15 +122,20 @@ const Planing = () => {
                         },
                     },
                 ]}
-                
             >
                 <Checkbox>Create a task board</Checkbox>
             </Form.Item>
 
             <Form.Item>
-                <Button onClick={()=>{ if (form.isFieldsValidating()){
-                    onFinish(form.getFieldsValue())
-                } }} type="primary" htmlType="submit" >
+                <Button
+                    onClick={() => {
+                        if (form.isFieldsValidating()) {
+                            onFinish(form.getFieldsValue());
+                        }
+                    }}
+                    type="primary"
+                    htmlType="submit"
+                >
                     Done
                 </Button>
             </Form.Item>
