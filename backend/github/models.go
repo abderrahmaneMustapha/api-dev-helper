@@ -83,6 +83,7 @@ type CommitGeneral struct {
 	HtmlUrl string `json:"html_url"`
 	Url string `json:"url"`
 	Commit Commit `json:"commit"`
+	CommitParent []CommitParent `json:"parents"`
 }
 
 
@@ -93,6 +94,10 @@ type Commit struct {
 }
 
 
+type CommitParent struct {
+	Url string `json:"url"`
+	Sha string `json:"sha"`
+}
 type Committer struct {
 	Name string `json:"name"`
 	Email string `json:"email"`

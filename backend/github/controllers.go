@@ -384,12 +384,12 @@ func ReturnMerges(w http.ResponseWriter, r *http.Request){
     var commit_contains_merges_count int
     for _ , commit := range commits{
         
-        if(strings.Contains(strings.ToLower(commit.Commit.Message), "merge")){
+        if(len(commit.CommitParent) > 1){
             commit_contains_merges_count += 1
         }
 
        
     }
     
-    fmt.Fprintf(w, "{count : %d}",  commit_contains_merges_count )
+    fmt.Fprintf(w, `{"count" : %d}`,  commit_contains_merges_count )
 }
