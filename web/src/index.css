@@ -27,3 +27,7 @@ code {
   overflow: auto;
   max-height: 400px;
 }
+
+#checks .ant-space-item{
+  min-width: 100%;
+}

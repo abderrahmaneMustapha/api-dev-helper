@@ -117,8 +117,9 @@ const Checks = () => {
     const getMergesCount = (owner, repository)=>{
         fetch(`http://localhost:10000/repos/${owner}/${repository}/merges`)
         .then((response) => response.json())
-        .then(async (result) => {
+        .then( (result) => {
             setMergesCount(result.count)
+            console.log(result.count)
         })
         .catch((error) => {
             console.log(error);
@@ -437,7 +438,7 @@ const Checks = () => {
     };
 
     return (
-        <>
+        <div id="checks">
             <Space style={{ width: "100%", marginBottom: "2em" }} size={10}>
                 <Input.Group style={{ width: "100%" }} compact>
                     <Input
@@ -654,7 +655,7 @@ const Checks = () => {
                     </Space>
                 </>
             )}
-        </>
+        </div>
     );
 };
 

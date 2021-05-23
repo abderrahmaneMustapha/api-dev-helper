@@ -1,6 +1,7 @@
 import { Router, Route, Switch } from "react-router";
 import { createBrowserHistory } from "history";
-import Steps from "./pages/steps";
+import Steps from "./pages/steps/steps";
+import Tracker from "./pages/tracker/tracker"
 import "antd/dist/antd.css";
 import { Layout } from "antd";
 
@@ -14,9 +15,9 @@ function App() {
                 <Sider>Sider</Sider>
                 <Layout>
                     <Router history={history}>
-                        <Switch>
-                         
+                        <Switch>                         
                             <Route path="/steps" component={Steps} />
+                            <Route path="/tracker" component={Tracker} />
                         </Switch>
                     </Router>
                 </Layout>
