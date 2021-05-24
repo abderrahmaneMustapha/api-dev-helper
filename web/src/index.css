@@ -29,7 +29,7 @@ code {
 }
 
 #checks .ant-space-item{
-  min-width: 100%;
+  min-width: 10%;
 }
 
 #right-tracker .ant-space-item:nth-child(2){
