@@ -21,11 +21,7 @@ func ReturnRepo(w http.ResponseWriter, r *http.Request){
 	owner:= vars["owner"]
 	url := fmt.Sprintf("https://api.github.com/repos/%s/%s", owner , repo )
 
-	resp, err  := http.Get(url)
-	if err != nil {
-		log.Fatalln(err)
-		fmt.Fprintf(w,"Internal server error")
-	}
+	resp := common.GetFromGhApi(url)
     
     body, err := ioutil.ReadAll(resp.Body)
     if err != nil {
@@ -49,11 +45,7 @@ func ReturnBraches(w http.ResponseWriter, r *http.Request){
 	owner:= vars["owner"]
 	url := fmt.Sprintf("https://api.github.com/repos/%s/%s/branches", owner , repo )
 
-	resp, err  := http.Get(url)
-	if err != nil {
-		log.Fatalln(err)
-		fmt.Fprintf(w,"Internal server error")
-	}
+	resp := common.GetFromGhApi(url)
     
     body, err := ioutil.ReadAll(resp.Body)
     if err != nil {
@@ -87,12 +79,8 @@ func ReturnBrachesStandanrd(w http.ResponseWriter, r *http.Request){
         return;
     }
    
-	resp, err  := http.Get(url)
-	if err != nil {
-		log.Fatalln(err)
-		fmt.Fprintf(w,"Internal server error")
-	}
-    
+	resp := common.GetFromGhApi(url)
+
     body, err := ioutil.ReadAll(resp.Body)
     if err != nil {
       log.Fatalln(err)
@@ -136,11 +124,7 @@ func ReturnBrancheProtection(w http.ResponseWriter, r *http.Request){
     branch := vars["branch"]
 	url := fmt.Sprintf("https://api.github.com/repos/%s/%s/branches/%s/protection", owner , repo, branch )
 
-	resp, err  := http.Get(url)
-	if err != nil {
-		log.Fatalln(err)
-		fmt.Fprintf(w,"Internal server error")
-	}
+	resp := common.GetFromGhApi(url)
     
     body, err := ioutil.ReadAll(resp.Body)
     if err != nil {
@@ -166,11 +150,7 @@ func ReturnRepoIssues(w http.ResponseWriter, r *http.Request){
 	owner:= vars["owner"]
 	url := fmt.Sprintf("https://api.github.com/repos/%s/%s/issues", owner , repo )
 
-	resp, err  := http.Get(url)
-	if err != nil {
-		log.Fatalln(err)
-		fmt.Fprintf(w,"Internal server error")
-	}
+	resp := common.GetFromGhApi(url)
     
     body, err := ioutil.ReadAll(resp.Body)
     if err != nil {
@@ -196,11 +176,7 @@ func ReturnPullRequests(w http.ResponseWriter, r *http.Request){
 	owner:= vars["owner"]
 	url := fmt.Sprintf("https://api.github.com/repos/%s/%s/pulls", owner , repo )
 
-	resp, err  := http.Get(url)
-	if err != nil {
-		log.Fatalln(err)
-		fmt.Fprintf(w,"Internal server error")
-	}
+	resp := common.GetFromGhApi(url)
     
     body, err := ioutil.ReadAll(resp.Body)
     if err != nil {
@@ -227,11 +203,7 @@ func ReturnCommitsStandanrd(w http.ResponseWriter, r *http.Request){
     standard := vars["standard"]
 	url := fmt.Sprintf("https://api.github.com/repos/%s/%s/commits", owner , repo )
 
-	resp, err  := http.Get(url)
-	if err != nil {
-		log.Fatalln(err)
-		fmt.Fprintf(w,"Internal server error")
-	}
+	resp := common.GetFromGhApi(url)
     
     standard_is_valid := common.ValidateCommitStandard(standard)
 
@@ -283,11 +255,7 @@ func ReturnTagsStandanrd(w http.ResponseWriter, r *http.Request){
     standard := vars["standard"]
 	url := fmt.Sprintf("https://api.github.com/repos/%s/%s/git/refs/tags", owner , repo )
 
-	resp, err  := http.Get(url)
-	if err != nil {
-		log.Fatalln(err)
-		fmt.Fprintf(w,"Internal server error")
-	}
+	resp := common.GetFromGhApi(url)
     
     standard_is_valid := common.ValidateTagStandard(standard)
 
@@ -336,11 +304,7 @@ func ReturnContributors(w http.ResponseWriter, r *http.Request){
 	owner:= vars["owner"]
 	url := fmt.Sprintf("https://api.github.com/repos/%s/%s/contributors", owner , repo )
 
-	resp, err  := http.Get(url)
-	if err != nil {
-		log.Fatalln(err)
-		fmt.Fprintf(w,"Internal server error")
-	}
+	resp  :=  common.GetFromGhApi(url)
     
     body, err := ioutil.ReadAll(resp.Body)
     if err != nil {
@@ -364,31 +328,21 @@ func ReturnMerges(w http.ResponseWriter, r *http.Request){
 	owner:= vars["owner"]
 	url := fmt.Sprintf("https://api.github.com/repos/%s/%s/commits", owner , repo )
 
-	resp, err  := http.Get(url)
-	if err != nil {
-		log.Fatalln(err)
-		fmt.Fprintf(w,"Internal server error")
-	}
-    
-  
+	resp := common.GetFromGhApi(url)
+	
     body, err := ioutil.ReadAll(resp.Body)
     if err != nil {
       log.Fatalln(err)
     }
-
-
 
     var commits []CommitGeneral
     json.Unmarshal(body, &commits)
    
     var commit_contains_merges_count int
     for _ , commit := range commits{
-        
         if(len(commit.CommitParent) > 1){
             commit_contains_merges_count += 1
         }
-
-       
     }
     
     fmt.Fprintf(w, `{"count" : %d}`,  commit_contains_merges_count )
