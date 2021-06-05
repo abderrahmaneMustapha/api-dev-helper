@@ -494,6 +494,7 @@ const Design = () => {
     return (
         <>
             <Form
+                className="styled-form"
                 name="api-design-choices"
                 form={form}
                 onFinish={onFinish}

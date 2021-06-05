@@ -439,6 +439,9 @@ const Checks = () => {
 
     return (
         <div id="checks">
+            {
+                loading===true ? <div>azeaze</div> : "b"
+            }
             <Space style={{ width: "100%", marginBottom: "2em" }} size={10}>
                 <Input.Group style={{ width: "100%" }} compact>
                     <Input
@@ -492,7 +495,7 @@ const Checks = () => {
                         : ""}
                 </Select>
             </Space>
-
+            
             {!loading && (
                 <>
                     <Space

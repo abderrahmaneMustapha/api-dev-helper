@@ -25,6 +25,7 @@ const Planing = () => {
 
     return (
         <Form
+             className="styled-form"
             name="planing-form"
             form={form}
             onFinish={onFinish}
