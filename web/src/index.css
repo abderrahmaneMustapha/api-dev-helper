@@ -36,3 +36,12 @@ code {
   min-width: 90%;
 
 }
+
+.styled-form{
+   margin: 2em !important;
+}
+
+ .ant-form-item-label label,.ant-checkbox-wrapper span {
+  font-size: 20px !important;
+  font-weight: 500;
+}
