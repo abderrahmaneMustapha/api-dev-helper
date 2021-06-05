@@ -51,6 +51,7 @@ func ReturnBraches(w http.ResponseWriter, r *http.Request){
     if err != nil {
       log.Fatalln(err)
     }
+   
 
     var branches  []Branch
     json.Unmarshal(body, &branches)
@@ -131,11 +132,12 @@ func ReturnBrancheProtection(w http.ResponseWriter, r *http.Request){
       log.Fatalln(err)
     }
 
-
+    fmt.Println(string(body))
 
     var brancheProtection BranchProtection
     json.Unmarshal(body, &brancheProtection)
 
+    fmt.Println(brancheProtection.RequiredPullRequestReviews)
     result, _ :=  json.Marshal(brancheProtection)
 
     fmt.Fprintf(w, string(result))
@@ -182,8 +184,6 @@ func ReturnPullRequests(w http.ResponseWriter, r *http.Request){
     if err != nil {
       log.Fatalln(err)
     }
-
-
 
     var pullRequests []PullRequest
     json.Unmarshal(body, &pullRequests)
