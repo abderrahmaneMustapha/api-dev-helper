@@ -31,7 +31,7 @@ func GetFromGhApi(url string) (*http.Response) {
 	auth_token := os.Getenv("Authorization")
 
 
-	req.Header.Set("Authorization", `token: "`+auth_token+`"`)
+	req.Header.Add("Authorization", `token `+auth_token)
 
 	client := &http.Client{}
    
