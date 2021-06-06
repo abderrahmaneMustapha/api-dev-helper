@@ -45,3 +45,7 @@ code {
   font-size: 20px !important;
   font-weight: 500;
 }
+
+.ant-layout-has-sider{
+  min-height: 100%;
+}
