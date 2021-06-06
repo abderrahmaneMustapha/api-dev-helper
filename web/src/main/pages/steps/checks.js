@@ -98,34 +98,40 @@ const Checks = () => {
         return issues;
     };
 
-    const countConributors = (result)=>{
-        return result.length
-    }
-    const getRepoContributors  = (owner, repository)=>{
-        fetch(`http://localhost:10000/repos/${owner}/${repository}/contributors`)
-        .then((response) => response.json())
-        .then(async (result) => {
-            var contributors_count = await countConributors(result);
-            setContributorsCount(contributors_count)
-        })
-        .catch((error) => {
-            console.log(error);
-            message.error("An error has aquired while getting contributors");
-        });
-    }
+    const countConributors = (result) => {
+        return result.length;
+    };
+    const getRepoContributors = (owner, repository) => {
+        fetch(
+            `http://localhost:10000/repos/${owner}/${repository}/contributors`
+        )
+            .then((response) => response.json())
+            .then(async (result) => {
+                var contributors_count = await countConributors(result);
+                setContributorsCount(contributors_count);
+            })
+            .catch((error) => {
+                console.log(error);
+                message.error(
+                    "An error has aquired while getting contributors"
+                );
+            });
+    };
 
-    const getMergesCount = (owner, repository)=>{
+    const getMergesCount = (owner, repository) => {
         fetch(`http://localhost:10000/repos/${owner}/${repository}/merges`)
-        .then((response) => response.json())
-        .then( (result) => {
-            setMergesCount(result.count)
-            console.log(result.count)
-        })
-        .catch((error) => {
-            console.log(error);
-            message.error("An error has aquired while getting contributors");
-        });
-    }
+            .then((response) => response.json())
+            .then((result) => {
+                setMergesCount(result.count);
+                console.log(result.count);
+            })
+            .catch((error) => {
+                console.log(error);
+                message.error(
+                    "An error has aquired while getting contributors"
+                );
+            });
+    };
     const getRepoBranchIssues = (owner, repository) => {
         fetch(`http://localhost:10000/repos/${owner}/${repository}/issues`)
             .then((response) => response.json())
@@ -258,7 +264,7 @@ const Checks = () => {
                 await getRepoBranchIssues(owner, repository);
                 await getRepoBranchPrs(owner, repository);
                 await getRepoContributors(owner, repository);
-                await getMergesCount(owner, repository)
+                await getMergesCount(owner, repository);
                 await getRepoBranchDataProtection(
                     owner,
                     repository,
@@ -298,11 +304,11 @@ const Checks = () => {
         owner: "",
         repository: "",
     });
-    const [merges_count, setMergesCount] = React.useState(0)
+    const [merges_count, setMergesCount] = React.useState(0);
     const [issues_count, setIssuesCount] = React.useState(0);
     const [prs_count, setPrsCount] = React.useState(0);
     const [commits_count, setCommitsCount] = React.useState(0);
-    const [contributors_count, setContributorsCount] = React.useState(0)
+    const [contributors_count, setContributorsCount] = React.useState(0);
     const [loading, setLoading] = React.useState(true);
 
     var issuesConfig = {
@@ -439,9 +445,6 @@ const Checks = () => {
 
     return (
         <div id="checks">
-            {
-                loading===true ? <div>azeaze</div> : "b"
-            }
             <Space style={{ width: "100%", marginBottom: "2em" }} size={10}>
                 <Input.Group style={{ width: "100%" }} compact>
                     <Input
@@ -460,42 +463,53 @@ const Checks = () => {
                         icon={<SearchOutlined />}
                     ></Button>
                 </Input.Group>
-                <Tag>
-                    <span className="span-tag-text">Commits: </span>{" "}
-                    {commits_count}
-                </Tag>
-                <Tag>
-                    <span className="span-tag-text">Pull requests: </span>
-                    {prs_count}
-                </Tag>
-                <Tag>
-                    <span className="span-tag-text">Contributors: </span> {contributors_count}
-                </Tag>
-                <Tag>
-                    <span className="span-tag-text">Issues: </span>{" "}
-                    {issues_count}
-                </Tag>
-                <Tag>
-                    <span className="span-tag-text">Merges: </span> {merges_count}
-                </Tag>
-
-                <Select
-                    defaultValue="branches"
-                    onChange={handleChange}
-                    style={{ width: "120%" }}
-                >
-                    {branches
-                        ? branches.map((value) => {
-                              return (
-                                  <Select.Option value={value.name}>
-                                      {value.name}
-                                  </Select.Option>
-                              );
-                          })
-                        : ""}
-                </Select>
+                {loading === false ? (
+                    <>
+                        <Tag>
+                            <span className="span-tag-text">Commits: </span>{" "}
+                            {commits_count}
+                        </Tag>
+                        <Tag>
+                            <span className="span-tag-text">
+                                Pull requests:{" "}
+                            </span>
+                            {prs_count}
+                        </Tag>
+                        <Tag>
+                            <span className="span-tag-text">
+                                Contributors:{" "}
+                            </span>{" "}
+                            {contributors_count}
+                        </Tag>
+                        <Tag>
+                            <span className="span-tag-text">Issues: </span>{" "}
+                            {issues_count}
+                        </Tag>
+                        <Tag>
+                            <span className="span-tag-text">Merges: </span>{" "}
+                            {merges_count}
+                        </Tag>
+                        <Select
+                            defaultValue="branches"
+                            onChange={handleChange}
+                            style={{ width: "120%" }}
+                        >
+                            {branches
+                                ? branches.map((value) => {
+                                      return (
+                                          <Select.Option value={value.name}>
+                                              {value.name}
+                                          </Select.Option>
+                                      );
+                                  })
+                                : ""}
+                        </Select>
+                    </>
+                ) : (
+                    <></>
+                )}
             </Space>
-            
+
             {!loading && (
                 <>
                     <Space

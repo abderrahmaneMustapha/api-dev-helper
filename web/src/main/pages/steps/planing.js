@@ -25,12 +25,15 @@ const Planing = () => {
 
     return (
         <Form
-             className="styled-form"
+            className="styled-form"
             name="planing-form"
             form={form}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
         >
+            <header class="styled-form-header">
+                <h3>Planing phase</h3>
+            </header>
             <Form.Item
                 name="needs"
                 valuePropName="checked"
@@ -127,7 +130,7 @@ const Planing = () => {
                 <Checkbox>Create a task board</Checkbox>
             </Form.Item>
 
-            <Form.Item>
+            <Form.Item className="ant-button-form-item">
                 <Button
                     onClick={() => {
                         if (form.isFieldsValidating()) {

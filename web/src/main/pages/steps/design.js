@@ -66,7 +66,6 @@ const RestfulDesignFormContent = () => {
                     <Radio.Button value="will-not">I will not</Radio.Button>
                 </Radio.Group>
             </Form.Item>
-
         </>
     );
 };
@@ -437,7 +436,6 @@ const DesignFirstModalContent = (props) => {
                     Done
                 </Button>
             </Form.Item>
-        
         </Form>
     );
 };
@@ -500,6 +498,9 @@ const Design = () => {
                 onFinish={onFinish}
                 layout="vertical"
             >
+                <header class="styled-form-header">
+                    <h3>Design phase</h3>
+                </header>
                 <Form.Item
                     name="api-available-for"
                     label="You want your api to be available for"
@@ -608,7 +609,7 @@ const Design = () => {
                     </Radio.Group>
                 </Form.Item>
 
-                <Form.Item>
+                <Form.Item  className="ant-button-form-item">
                     <Button type="primary" htmlType="submit">
                         Done
                     </Button>

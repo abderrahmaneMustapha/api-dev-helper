@@ -37,15 +37,47 @@ code {
 
 }
 
-.styled-form{
-   margin: 2em !important;
+.steps-content{
+  display: flex;
+  justify-content: center;
 }
 
+.styled-form{
+  width: 50%;
+  border-radius: 4px;
+  background-color:white !important;
+  margin: 2em !important;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;  
+  -moz-box-shadow:    3px 3px 5px 6px #ccc;  
+  box-shadow:         3px 3px 5px 6px #ccc;
+}
+
+.styled-form .ant-form-item{
+  margin-bottom: 0;
+  padding: 0 0.7em 1.3em 0.7em;
+}
+.styled-form .ant-form-item:hover{
+     background-color: #F0F2F5;
+
+}
+.styled-form .ant-button-form-item{
+ background-color: white !important;
+ margin: 1em;
+}
  .ant-form-item-label label,.ant-checkbox-wrapper span {
-  font-size: 20px !important;
-  font-weight: 500;
+  font-size: 1.2em !important;
+  font-weight: 400;
 }
 
 .ant-layout-has-sider{
   min-height: 100%;
+}
+
+.styled-form-header{
+  width: 100%;
+  margin: 1rem 0 1.6rem 0;
+}
+.styled-form-header h3{
+  font-size: 1.5rem;
+  text-align: center;
 }
