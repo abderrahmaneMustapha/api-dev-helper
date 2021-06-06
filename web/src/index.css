@@ -81,3 +81,19 @@ code {
   font-size: 1.5rem;
   text-align: center;
 }
+
+.steps-settings-card-wrapper{
+  font-size: 1em;
+  margin: 1.7em 0 1.4em 1.6em ;
+}
+.steps-settings-card-wrapper .ant-card-cover{
+  padding: 1em;
+}
+
+.steps-settings-card-wrapper header {
+  margin: 0 1em 1em  0;
+}
+
+.steps-settings-card-wrapper .description {
+  margin:  1em 0 1em 0;
+}

@@ -1,6 +1,7 @@
 import { Route, Switch, useHistory } from "react-router-dom";
 import Steps from "./pages/steps/steps";
 import Tracker from "./pages/tracker/tracker";
+import Settings  from "./pages/settings/settings"
 import "antd/dist/antd.css";
 import {
     PieChartOutlined,
@@ -79,6 +80,7 @@ function App() {
                 <Switch component={App}>
                     <Route path="/steps" component={Steps} />
                     <Route path="/tracker" component={Tracker} />
+                    <Route path="/settings" component={Settings} />
                 </Switch>
             </Layout>
         </Layout>
