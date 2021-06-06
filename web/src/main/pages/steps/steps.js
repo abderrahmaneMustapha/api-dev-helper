@@ -1,8 +1,8 @@
 import React from "react";
 import { Steps as AntSteps, Button } from "antd";
-import Planing from "./planing";
-import Design from "./design";
-import Checks from "./checks";
+import Planing from "./planing/planing";
+import Design from "./design/design";
+import Checks from "./checks/checks";
 const steps = [
     {
         title: "Planing",
