@@ -90,6 +90,15 @@ code {
   padding: 1em;
 }
 
+.steps-settings-card-wrapper  img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.steps-settings-card-wrapper .ant-card-body{
+  padding: 1em 0.1em 1em 0.1em;
+}
+
 .steps-settings-card-wrapper header {
   margin: 0 1em 1em  0;
 }
