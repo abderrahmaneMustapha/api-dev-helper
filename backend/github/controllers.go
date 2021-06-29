@@ -176,7 +176,8 @@ func ReturnPullRequests(w http.ResponseWriter, r *http.Request){
 	
     repo := vars["repo"]
 	owner:= vars["owner"]
-	url := fmt.Sprintf("https://api.github.com/repos/%s/%s/pulls", owner , repo )
+	url := fmt.Sprintf("https://api.github.com/repos/%s/%s/pulls", 
+                owner , repo )
 
 	resp := common.GetFromGhApi(url)
     
@@ -346,4 +347,32 @@ func ReturnMerges(w http.ResponseWriter, r *http.Request){
     }
     
     fmt.Fprintf(w, `{"count" : %d}`,  commit_contains_merges_count )
+}
+
+func GithubCallback(w http.ResponseWriter, r *http.Request){
+    common.EnableCors(&w)
+
+    code := r.URL.Query().Get("code")
+
+    clientID := common.GetGithubClientID()
+    clientSecret := common.GetGithubClientSecret()
+
+
+	url := fmt.Sprintf("https://github.com/login/oauth/access_token?client_id=%s&client_secret=%s&code=%s", clientID, clientSecret, code)
+    
+    
+    resp := common.PostFromGhApi(url)
+	
+    body, err := ioutil.ReadAll(resp.Body)
+
+    if err != nil {
+      log.Fatalln(err)
+    }
+
+    var accesstoken OAuthAccessResponse
+    json.Unmarshal(body, &accesstoken)
+
+    result, _ :=  json.Marshal(accesstoken)
+    
+    fmt.Fprintf(w, string(result))
 }

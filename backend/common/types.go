@@ -1,4 +1,5 @@
 package common
+
 import (
 	"errors"
 	"fmt"

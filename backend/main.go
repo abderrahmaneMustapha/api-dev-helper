@@ -11,10 +11,6 @@ import (
 )
 
 
-// let's declare a global Articles array
-// that we can then populate in our main function
-// to simulate a database
-
 
 func homePage(w http.ResponseWriter, r *http.Request){
     fmt.Fprintf(w, "Welcome to the HomePage!")
@@ -42,6 +38,8 @@ func handleRequests() {
     myRouter.HandleFunc("/repos/{owner}/{repo}/contributors", github.ReturnContributors)
     myRouter.HandleFunc("/repos/{owner}/{repo}/merges", github.ReturnMerges)
    
+    myRouter.HandleFunc("/oauth/redirect", github.GithubCallback)
+    
     
     myRouter.HandleFunc("/repos/{owner}/{repo}/commits/validation/{standard}", github.ReturnCommitsStandanrd) 
     myRouter.HandleFunc("/repos/{owner}/{repo}/tags/validation/{standard}",github.ReturnTagsStandanrd) 
@@ -50,6 +48,8 @@ func handleRequests() {
    
     myRouter.HandleFunc("/steps/planing/validation", planing.ValidatePlaning)
     myRouter.HandleFunc("/steps/design/validation", design.ValidateDesign)
+
+   
     
     log.Fatal(http.ListenAndServe(":10000", myRouter))
 }

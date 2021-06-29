@@ -78,6 +78,9 @@ type PullRequest struct {
     UpdatedAt string `json:"updated_at"`
 }
 
+type OAuthAccessResponse struct {
+	AccessToken string `json:"access_token"`
+}
 type CommitGeneral struct {
 	Author GithubUser `json:"author"`
 	HtmlUrl string `json:"html_url"`

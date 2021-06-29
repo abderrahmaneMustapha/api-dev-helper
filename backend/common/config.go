@@ -43,3 +43,31 @@ func GetFromGhApi(url string) (*http.Response) {
     }
 	return resp
 }
+
+
+func PostFromGhApi(url string) (*http.Response) {
+
+	req, err :=  http.NewRequest("POST",url, nil)
+
+	if err != nil {
+        log.Println("Error on request.\n[ERROR] -", err)
+    }
+
+	path := "../backend/.env"
+	openEnvFile(path)
+	auth_token := os.Getenv("Authorization")
+
+
+	req.Header.Add("Authorization", `token `+auth_token)
+	req.Header.Add("Accept", "application/json")
+	
+	client := &http.Client{}
+   
+	resp, err := client.Do(req)
+	
+
+    if err != nil {
+        log.Println("Error on response.\n[ERROR] -", err)
+    }
+	return resp
+}
